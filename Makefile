@@ -1,3 +1,5 @@
+include .env
+
 #run container
 init: docker-down-clear docker-pull docker-build-pull docker-up
 
@@ -30,19 +32,19 @@ docker-build-pull:
 	docker-compose build --pull
 
 laravel-install:
-	docker-compose exec app composer create-project laravel/laravel application
+	docker-compose exec ${APP_NAME}_app composer create-project laravel/laravel ${APP_NAME}
 
 composer-install:
-	docker run --rm -v $(current_dir)/application:/app composer install
+	docker-compose exec app composer install
 
 composer-install-packages:
-	docker-compose exec app sh -c "cd application && composer require barryvdh/laravel-debugbar --dev"
+	docker-compose exec ${APP_NAME}_app sh -c "composer require barryvdh/laravel-debugbar --dev"
 
 laravel-migrate:
-	docker-compose exec app sh -c "cd application && php artisan migrate"
+	docker-compose exec ${APP_NAME}_app sh -c "php artisan migrate"
 
 laravel-migrate-fresh:
-	docker-compose exec app sh -c "cd application &&php artisan migrate:fresh"
+	docker-compose exec ${APP_NAME}_app sh -c "php artisan migrate:fresh"
 
 laravel-migrate-fresh-seed:
-	docker-compose exec app sh -c "cd application && php artisan migrate:fresh --seed"
+	docker-compose exec ${APP_NAME}_app sh -c "php artisan migrate:fresh --seed"
