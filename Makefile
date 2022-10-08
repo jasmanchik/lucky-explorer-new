@@ -38,13 +38,13 @@ composer-install:
 	docker-compose exec app composer install
 
 composer-install-packages:
-	docker-compose exec ${APP_NAME}_app sh -c "composer require barryvdh/laravel-debugbar --dev"
+	docker-compose exec app sh -c "composer require barryvdh/laravel-debugbar --dev"
 
 laravel-migrate:
-	docker-compose exec ${APP_NAME}_app sh -c "php artisan migrate"
+	docker-compose exec app sh -c "php artisan migrate"
 
 laravel-migrate-fresh:
-	docker-compose exec ${APP_NAME}_app sh -c "php artisan migrate:fresh"
+	docker-compose exec app sh -c "php artisan migrate:fresh"
 
 laravel-migrate-fresh-seed:
-	docker-compose exec ${APP_NAME}_app sh -c "php artisan migrate:fresh --seed"
+	docker-compose exec app sh -c "php artisan migrate:fresh --seed"

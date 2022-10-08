@@ -1,5 +1,5 @@
-ARG DOCKER_PHP_VERSION
-FROM php:${DOCKER_PHP_VERSION}
+ARG PHP_VERSION
+FROM php:${PHP_VERSION}
 
 # Set working directory
 WORKDIR /var/www
